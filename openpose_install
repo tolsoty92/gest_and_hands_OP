@@ -1,0 +1,66 @@
+CUDA!
+
+https://developer.nvidia.com/cuda-80-ga2-download-archive
+
+$ export PATH=/usr/local/cuda-8.0/bin${PATH:+:${PATH}}
+$ export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}} 
+
+cudnn
+
+https://developer.nvidia.com/rdp/cudnn-archive
+
+
+$ sudo cp cuda/include/cudnn.h /usr/local/cuda/include
+$ sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
+$ sudo chmod a+r /usr/local/cuda/include/cudnn.h
+/usr/local/cuda/lib64/libcudnn*
+
+
+opencv
+
+https://www.pyimagesearch.com/2015/07/20/install-opencv-3-0-and-python-3-4-on-ubuntu/
+
+openpose
+
+git clone https://github.com/CMU-Perceptual-Computing-Lab/openpose
+
+cd openpose
+
+git pull origin master
+
+sudo apt-get install libatlas-base-dev
+
+bash ./ubuntu/install_caffe_and_openpose_if_cuda8.sh
+
+
+cd 3rdparty/caffe/
+
+edit Makefile.config.Ubuntu16_cuda8.example
+
+cp Makefile.config.Ubuntu16_cuda8.example Makefile.config
+
+sudo make -j4
+sudo make distribute -j4
+
+cd ../../models/
+
+bash ./getModels.sh
+
+cd openpose
+
+cp Makefile.config.Ubuntu16_cuda8.example Makefile.config
+
+mkdir build 
+
+CMAKE_GUI
+
+cd build
+
+cp ../Makefile.comfig ./
+
+sudo make -j4
+
+sudo make install
+
+reboot
+
